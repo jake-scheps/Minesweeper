@@ -52,7 +52,7 @@ public class Board {
 		
 		HashSet<Space> adjacentSpaces = getAdjacentSpaces(spaces[x][y]);
 		for (Space space : adjacentSpaces) {
-			space.incrememntNumMines();
+			space.incrementNumMines();
 		}
 	}
 	

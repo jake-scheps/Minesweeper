@@ -13,7 +13,7 @@ public class Space implements Comparable<Space> {
 		numAdjacentMines = 0;
 	}
 	
-	public void incrememntNumMines() {
+	public void incrementNumMines() {
 		if (!mine) {
 			numAdjacentMines++;
 		}

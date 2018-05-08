@@ -1,5 +1,6 @@
 package minesweeper;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -33,17 +34,18 @@ public class Board {
 	}
 	
 	public void initMines(int x, int y) {
-		for (int i=0;i<numMines;i++) {
-			boolean mined = false;
-			while (!mined) {
-				int minex = rand.nextInt(sizex), miney = rand.nextInt(sizey);
-				Space mineSpace = spaces[minex][miney];
-				if (!(minex==x && miney==y) && !mineSpace.mine) {
-					mineSpace.mine=true;
-					mined=true;
-					incrementAdjacentSpaces(mineSpace.x, mineSpace.y);
+		ArrayList<Space> mineableSpaces = new ArrayList<Space>();
+		for (int i=0;i<sizex;i++) {
+			for (int j=0;j<sizey;j++) {
+				if (!(i==x&&j==y)) {
+					mineableSpaces.add(spaces[i][j]);
 				}
 			}
+		}
+		for (int i=0;i<numMines;i++) {
+			Space mineSpace = mineableSpaces.remove(rand.nextInt(mineableSpaces.size()));
+			mineSpace.mine=true;
+			incrementAdjacentSpaces(mineSpace.x, mineSpace.y);
 		}
 		minesInit=true;
 	}
